@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador de 24 horas</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <h1>Contador de 24 horas</h1>
+    <div id="contador">24:00:00</div>
+    <div id="mensaje"></div>
+    <div id="imagen"></div>
+
+    <script>
+        // Función para actualizar el contador
+function actualizarContador() {
+    var ahora = new Date();
+    var horaFinal = new Date(ahora);
+    horaFinal.setHours(21, 0, 0, 0); // 9 pm en hora colombiana
+
+    // Si ya pasó la hora final de hoy, establecer la hora final para el próximo día
+    if (ahora >= horaFinal) {
+        horaFinal.setDate(horaFinal.getDate() + 1);
+    }
+
+    var diferencia = horaFinal - ahora;
+
+    var horas = String(Math.floor(diferencia / (1000 * 60 * 60))).padStart(2, '0');
+    var minutos = String(Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+    var segundos = String(Math.floor((diferencia % (1000 * 60)) / 1000)).padStart(2, '0');
+
+    document.getElementById('contador').innerText = horas + ':' + minutos + ':' + segundos;
+
+    // Actualizar cada segundo
+    setTimeout(actualizarContador, 1000);
+}
+
+        // Función para mostrar un mensaje y una imagen específica
+        function mostrarMensajeEImagen() {
+            document.getElementById('mensaje').innerText = "¡Un nuevo día comienza!";
+
+            // Crear un elemento de imagen y establecer su atributo src
+            var imagen = document.createElement('img');
+            imagen.src = "img/imagen1.jpg";
+
+            // Añadir la imagen al elemento con id 'imagen'
+            document.getElementById('imagen').innerHTML = '';
+            document.getElementById('imagen').appendChild(imagen);
+        }
+
+        // Iniciar el contador
+        actualizarContador();
+
+        // Mostrar mensaje e imagen después de 5 segundos (simulando un cambio diario)
+        setTimeout(mostrarMensajeEImagen, 5000);
+    </script>
+
+</body>
+</html>

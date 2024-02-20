@@ -1,0 +1,11 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 50px;
+    background-color: rgb(253, 230, 255); /* Cambia el color de fondo*/
+}
+
+#contador {
+    font-size: 10em;
+    color: #000000;
+}
